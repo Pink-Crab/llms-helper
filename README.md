@@ -76,7 +76,7 @@ Copies are rendered by a request from the site to its own page (`Loopback_Conten
 
 * `tests.yml` PHPUnit on PHP 8.2 to 8.4.
 * `quality.yml` PHPCS and PHPStan.
-* `e2e.yml` Playwright, on pull requests.
+* `e2e.yml` Playwright in 4 shards, each on its own runner, on pull requests.
 * `mutation.yml` Infection, one thread, started by hand.
 * `release.yml` builds `llms-helper.zip` when a GitHub release is published.
 
