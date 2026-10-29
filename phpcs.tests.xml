@@ -4,6 +4,7 @@
 
 	<file>./tests</file>
 	<file>./e2e/mu-plugins</file>
+	<file>./e2e/plugins</file>
 
 	<!-- WordPress test config defines core constants and globals. -->
 	<exclude-pattern>(?-i)*/tests/wp-config\.php</exclude-pattern>

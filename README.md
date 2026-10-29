@@ -4,7 +4,7 @@ Writes static Markdown copies of WordPress content and an `llms.txt` to uploads,
 
 ## Requirements
 
-* PHP 8.0+
+* PHP 8.2+
 * WordPress 6.0+
 
 ## Development
@@ -57,7 +57,7 @@ Copies are rendered by a request from the site to its own page (`Loopback_Conten
 
 `seo-noindex.spec.js` runs the same tests against Yoast SEO, Rank Math, SEOPress, AIOSEO and Slim SEO, one at a time. The global setup installs them from wordpress.org, inactive. `e2e/mu-plugins/llms-e2e-seo.php` adds `wp llms-e2e-seo`, which sets noindex where each plugin stores it, and each test checks the copy against the robots tag the plugin prints.
 
-`membership.spec.js` does the same for Paid Memberships Pro, Members, Content Control, Ultimate Member, Restrict Content, LifterLMS and WooCommerce Memberships, through `wp llms-e2e-access`, checking the copy against whether a logged out visitor sees the post's content. Paid Memberships Pro is installed from its GitHub tag, as it has left wordpress.org. WooCommerce Memberships is paid, so it is mapped in from a local copy by `.wp-env.override.json`, which is not committed:
+`membership.spec.js` does the same for Paid Memberships Pro, Members, Content Control, Ultimate Member, Restrict Content, LifterLMS and WooCommerce Memberships, through `wp llms-e2e-access`, checking the copy against whether a logged out visitor sees the post's content. Paid Memberships Pro is installed from its GitHub tag, as it has left wordpress.org. WooCommerce Memberships is paid, so `e2e/plugins/woocommerce-memberships` stands in for it, as on CI: it reads the real plugin's `wc_memberships_rules` and hides what the real plugin hides from a visitor with no membership. To test against the real plugin, map a local copy over it in `.wp-env.override.json`, which is not committed:
 
 ```json
 {
@@ -74,7 +74,7 @@ Copies are rendered by a request from the site to its own page (`Loopback_Conten
 
 ### GitHub workflows
 
-* `tests.yml` PHPUnit on PHP 8.0 to 8.4.
+* `tests.yml` PHPUnit on PHP 8.2 to 8.4.
 * `quality.yml` PHPCS and PHPStan.
 * `e2e.yml` Playwright, on pull requests.
 * `mutation.yml` Infection, one thread, started by hand.
