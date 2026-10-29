@@ -8,6 +8,11 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    # Each shard gets its own runner and wp-env, and runs a quarter of the spec files.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [ 1, 2, 3, 4 ]
 
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +42,7 @@ jobs:
         run: npx wp-env start
 
       - name: Run E2E tests
-        run: npm run test:e2e
+        run: npm run test:e2e -- --shard=${{ matrix.shard }}/4
         env:
           WP_BASE_URL: http://localhost:57892
           WP_USERNAME: admin
@@ -47,7 +52,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: e2e-test-results
+          name: e2e-test-results-${{ matrix.shard }}
           path: |
             test-results/
             playwright-report/

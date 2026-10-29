@@ -1,5 +1,5 @@
 const { test, expect } = require( '../fixtures' );
-const { wpCli, resetSettings } = require( '../fixtures/wp-cli' );
+const { wpCli } = require( '../fixtures/wp-cli' );
 
 const CONTENT = '<!-- wp:paragraph --><p>Core body.</p><!-- /wp:paragraph -->';
 const BATCH = 'llms_helper_build_batch';
@@ -22,17 +22,6 @@ const last = ( output ) => output.split( '\n' ).pop().trim();
  * @return {number} Count.
  */
 const queued = ( hook ) => Number( last( wpCli( 'cron', 'event', 'list', `--hook=${ hook }`, '--format=count' ) ) );
-
-/**
- * Removes every queued event for a hook.
- *
- * @param {string} hook Hook name.
- */
-function unqueue( hook ) {
-	if ( queued( hook ) > 0 ) {
-		wpCli( 'cron', 'event', 'delete', hook );
-	}
-}
 
 /**
  * Runs a hook's queued events until none are left, as WP-Cron would over several requests.
@@ -58,27 +47,13 @@ async function exists( request, path ) {
 test.describe( 'Core behaviour', () => {
 	test.use( { storageState: { cookies: [], origins: [] } } );
 
+	// Settings, queue and test options, in one WP-CLI call (llms-e2e-core.php).
 	test.beforeEach( () => {
-		resetSettings();
-		unqueue( BATCH );
-		unqueue( INDEX );
-		unqueue( POSTS );
-		unqueue( RETRY );
+		wpCli( 'llms-e2e-core', 'reset' );
 	} );
 
 	test.afterEach( async ( { requestUtils } ) => {
-		resetSettings();
-		unqueue( BATCH );
-		unqueue( INDEX );
-		unqueue( POSTS );
-		unqueue( RETRY );
-		for ( const option of [ 'llms_e2e_record_purges', 'llms_e2e_purged', 'llms_e2e_crash_build', 'llms_helper_build_failed', 'llms_e2e_break_loopback' ] ) {
-			try {
-				wpCli( 'option', 'delete', option );
-			} catch ( error ) {
-				// Not set.
-			}
-		}
+		wpCli( 'llms-e2e-core', 'reset' );
 		await requestUtils.deleteAllPages();
 		await requestUtils.deleteAllPosts();
 	} );
