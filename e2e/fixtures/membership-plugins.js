@@ -1,7 +1,8 @@
 // The membership plugins Membership_Plugin_Access reads. `slug` is the key llms-e2e-access.php uses and `folder` the
 // installed plugin folder, which also tells whether a `source` plugin is already installed. `wordpressOrg` ones are
 // installed by slug; `source` ones from that zip, as Paid Memberships Pro left wordpress.org for GitHub.
-// WooCommerce Memberships is paid and mapped in from .wp-env.override.json. `siteGate` ones can close the whole
+// WooCommerce Memberships is paid: e2e/plugins/woocommerce-memberships stands in for it, unless .wp-env.override.json
+// maps the real plugin over it. `siteGate` ones can close the whole
 // site to visitors. `shortcode` wraps content for members only, %s marking where it goes. `blockAttrs` are the block
 // attributes that show a block to logged in users only.
 const MEMBERSHIP_PLUGINS = [

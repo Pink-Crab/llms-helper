@@ -15,7 +15,8 @@ module.exports = defineConfig( {
 	retries: process.env.CI ? 2 : 0,
 	workers: 1,
 	reporter: [
-		[ 'list' ],
+		// On CI, line prints each failure as it happens.
+		[ process.env.CI ? 'line' : 'list' ],
 		[ 'html', { outputFolder: '../playwright-report', open: 'never' } ],
 	],
 	use: {
