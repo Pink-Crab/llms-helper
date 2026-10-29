@@ -1,0 +1,22 @@
+{
+    "name": "llms-helper",
+    "version": "0.1.0-rc.1",
+    "private": true,
+    "description": "End-to-end tests for the LLMs Helper WordPress plugin.",
+    "author": "PinkCrab",
+    "license": "GPL-2.0-or-later",
+    "scripts": {
+        "wp-env": "wp-env",
+        "wp-env:start": "wp-env start",
+        "test:e2e": "playwright test --config=e2e/playwright.config.js",
+        "test:e2e:ui": "playwright test --config=e2e/playwright.config.js --ui",
+        "test:e2e:headed": "playwright test --config=e2e/playwright.config.js --headed",
+        "test:e2e:setup": "playwright test --config=e2e/playwright.config.js --project=setup"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.50.0",
+        "@wordpress/e2e-test-utils-playwright": "^1.12.0",
+        "@wordpress/env": "^10.0.0",
+        "dotenv": "^16.4.0"
+    }
+}

@@ -1,0 +1,16 @@
+/.github            export-ignore
+/e2e                export-ignore
+/tests              export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.wp-env.json       export-ignore
+/infection.json     export-ignore
+/.nvmrc             export-ignore
+/TODO.md            export-ignore
+/package.json       export-ignore
+/package-lock.json  export-ignore
+/phpcs.base.xml     export-ignore
+/phpcs.tests.xml    export-ignore
+/phpcs.xml          export-ignore
+/phpstan.neon.dist  export-ignore
+/phpunit.xml.dist   export-ignore

@@ -1,0 +1,17 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+    level: 8
+    phpVersion: 80000
+    inferPrivatePropertyTypeFromConstructor: true
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - llms-helper.php
+        - src
+    scanFiles:
+        - vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
+        - vendor/pinkcrab/action-scheduler_stubs/action-scheduler_stubs.php
+        - tests/stubs/seo-plugins.php
+        - tests/stubs/membership-plugins.php
+        - tests/stubs/cache-plugins.php

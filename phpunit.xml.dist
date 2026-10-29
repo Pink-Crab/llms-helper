@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+	bootstrap="tests/bootstrap.php"
+	colors="true"
+	executionOrder="depends,random"
+	cacheResultFile="tests/.cache/phpunit/result.cache"
+	failOnWarning="true"
+	failOnRisky="true"
+	beStrictAboutOutputDuringTests="true"
+>
+	<testsuites>
+		<testsuite name="LLMs Helper">
+			<directory prefix="Test_" suffix=".php">./tests</directory>
+		</testsuite>
+	</testsuites>
+
+	<coverage processUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">./src</directory>
+		</include>
+	</coverage>
+
+	<php>
+		<env name="WP_PHPUNIT__TESTS_CONFIG" value="tests/wp-config.php"/>
+	</php>
+</phpunit>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<ruleset name="LLMs Helper base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+	<description>Rules shared by phpcs.xml and phpcs.tests.xml. Carries no tests/ exclusion, or the tests profile would scan nothing.</description>
+
+	<!-- (?-i) keeps the patterns case-sensitive so PascalCase source folders are still scanned. -->
+	<exclude-pattern>(?-i)*/vendor/*</exclude-pattern>
+	<exclude-pattern>(?-i)*/node_modules/*</exclude-pattern>
+	<exclude-pattern>(?-i)*/wordpress/*</exclude-pattern>
+	<exclude-pattern>(?-i)*/tests/\.cache/*</exclude-pattern>
+
+	<arg value="sp"/>
+	<arg name="colors"/>
+	<arg name="parallel" value="8"/>
+	<arg name="extensions" value="php"/>
+
+	<!-- PHP and WordPress floors, matching the plugin header. -->
+	<rule ref="PHPCompatibilityWP"/>
+	<config name="testVersion" value="8.0-"/>
+	<config name="minimum_wp_version" value="6.0"/>
+
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="Universal.Operators.DisallowShortTernary"/>
+	</rule>
+
+	<rule ref="WordPress-Docs">
+		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+	</rule>
+
+	<rule ref="Squiz.Commenting.FunctionComment">
+		<properties>
+			<property name="skipIfInheritdoc" value="true"/>
+		</properties>
+		<!-- Allows generic docblock types such as class-string<T> over the native hint. -->
+		<exclude name="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="llms-helper"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="llms_helper"/>
+				<element value="PinkCrab\LLMs_Helper"/>
+				<element value="PINKCRAB_LLMS_HELPER"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

@@ -1,0 +1,35 @@
+# Dependencies
+vendor/
+node_modules/
+composer.lock
+
+# WordPress installed by roots/wordpress for PHPUnit
+wordpress/
+
+# Tool caches, coverage and mutation reports
+tests/.cache/
+.phpunit.result.cache
+
+# Local config
+tests/.env
+e2e/.env
+.wp-env.override.json
+
+# E2E artifacts
+artifacts/
+test-results/
+playwright-report/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

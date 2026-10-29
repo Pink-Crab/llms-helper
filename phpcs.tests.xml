@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ruleset name="LLMs Helper tests" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+	<description>Test code profile.</description>
+
+	<file>./tests</file>
+	<file>./e2e/mu-plugins</file>
+
+	<!-- WordPress test config defines core constants and globals. -->
+	<exclude-pattern>(?-i)*/tests/wp-config\.php</exclude-pattern>
+
+	<!-- PHPStan declarations of other plugins' functions, in their own layout. -->
+	<exclude-pattern>*/tests/stubs/*</exclude-pattern>
+
+	<rule ref="./phpcs.base.xml">
+		<!-- Test classes, methods and properties carry no docblocks. -->
+		<exclude name="Squiz.Commenting.ClassComment"/>
+		<exclude name="Squiz.Commenting.VariableComment"/>
+		<exclude name="Squiz.Commenting.FunctionComment"/>
+		<exclude name="Squiz.Commenting.FunctionCommentThrowTag"/>
+		<exclude name="Generic.Commenting.DocComment"/>
+		<!-- Fixtures set globals such as $_SERVER and $post. -->
+		<exclude name="WordPress.WP.GlobalVariablesOverride"/>
+		<!-- Fixture classes sit in the test file that uses them. -->
+		<exclude name="Generic.Files.OneObjectStructurePerFile"/>
+		<exclude name="WordPress.Security.EscapeOutput.ExceptionNotEscaped"/>
+		<!-- Tests read and write files directly to check what the plugin wrote. -->
+		<exclude name="WordPress.WP.AlternativeFunctions"/>
+		<exclude name="WordPress.NamingConventions.PrefixAllGlobals"/>
+	</rule>
+</ruleset>
