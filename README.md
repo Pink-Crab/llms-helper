@@ -4,7 +4,7 @@ Writes static Markdown copies of WordPress content and an `llms.txt` to uploads,
 
 ## Requirements
 
-* PHP 8.0+
+* PHP 8.2+
 * WordPress 6.0+
 
 ## Development
@@ -74,7 +74,7 @@ Copies are rendered by a request from the site to its own page (`Loopback_Conten
 
 ### GitHub workflows
 
-* `tests.yml` PHPUnit on PHP 8.0 to 8.4.
+* `tests.yml` PHPUnit on PHP 8.2 to 8.4.
 * `quality.yml` PHPCS and PHPStan.
 * `e2e.yml` Playwright, on pull requests.
 * `mutation.yml` Infection, one thread, started by hand.
